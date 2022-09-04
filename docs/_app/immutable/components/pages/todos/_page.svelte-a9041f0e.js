@@ -1,5 +1,5 @@
 import { Q as is_function, S as SvelteComponent, i as init, s as safe_not_equal, k as element, a as space, q as text, P as query_selector_all, l as claim_element, h as detach, c as claim_space, m as children, r as claim_text, n as attr, F as append_hydration, b as insert_hydration, R as action_destroyer, T as update_keyed_each, d as check_outros, f as transition_in, t as transition_out, E as toggle_class, U as fix_position, V as add_transform, W as create_animation, X as add_render_callback, Y as create_bidirectional_transition, O as run_all, g as group_outros, Z as fix_and_outro_and_destroy_block, A as noop } from "../../../chunks/index-5b0149c9.js";
-import { d as client } from "../../../chunks/singletons-d80afa86.js";
+import { d as client } from "../../../chunks/singletons-03b9dd82.js";
 import "../../../chunks/index-b73ee6b7.js";
 function cubicOut(t) {
   const f = t - 1;
@@ -519,4 +519,4 @@ export {
   Page as default,
   prerender
 };
-//# sourceMappingURL=_page.svelte-89ccc43f.js.map
+//# sourceMappingURL=_page.svelte-a9041f0e.js.map

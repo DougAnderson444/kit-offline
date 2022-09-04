@@ -1,6 +1,6 @@
 import { S as SvelteComponent, i as init, s as safe_not_equal, k as element, q as text, a as space, e as empty, l as claim_element, m as children, r as claim_text, h as detach, c as claim_space, b as insert_hydration, F as append_hydration, u as set_data, A as noop, G as component_subscribe } from "../chunks/index-5b0149c9.js";
-import { p as page } from "../chunks/stores-f8c8bb87.js";
-import "../chunks/singletons-d80afa86.js";
+import { p as page } from "../chunks/stores-53318450.js";
+import "../chunks/singletons-03b9dd82.js";
 import "../chunks/index-b73ee6b7.js";
 function create_if_block_1(ctx) {
   let pre;
@@ -186,4 +186,4 @@ class Error extends SvelteComponent {
 export {
   Error as default
 };
-//# sourceMappingURL=error.svelte-56acf75b.js.map
+//# sourceMappingURL=error.svelte-0087248f.js.map

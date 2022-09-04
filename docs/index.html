@@ -5,9 +5,9 @@
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="theme-color" content="#000" />
-		<link rel="manifest" href="/manifest.webmanifest" />
-		<link rel="shortcut icon" type="image/svg" href="/svelte.svg" />
-		<link rel="apple-touch-icon" href="/svelte.svg" />
+		<link rel="manifest" href="./manifest.webmanifest" />
+		<link rel="shortcut icon" type="image/svg" href="./svelte.svg" />
+		<link rel="apple-touch-icon" href="./svelte.svg" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="apple-mobile-web-app-title" content="My Apps" />
@@ -16,16 +16,31 @@
 		<meta http-equiv="content-security-policy" content=""><title>Home</title><meta name="description" content="Svelte demo app" data-svelte="svelte-t32ptj">
 	<link href="./_app/immutable/assets/+layout-f00d6398.css" rel="stylesheet">
 	<link href="./_app/immutable/assets/+page-ab7a0104.css" rel="stylesheet">
-	<link rel="modulepreload" href="./_app/immutable/start-2cf27035.js">
+	<link rel="modulepreload" href="./_app/immutable/start-4f24206f.js">
 	<link rel="modulepreload" href="./_app/immutable/chunks/index-5b0149c9.js">
-	<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d80afa86.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/singletons-03b9dd82.js">
 	<link rel="modulepreload" href="./_app/immutable/chunks/index-b73ee6b7.js">
-	<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-44f1e18b.js">
-	<link rel="modulepreload" href="./_app/immutable/chunks/stores-f8c8bb87.js">
+	<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-3b251c56.js">
+	<link rel="modulepreload" href="./_app/immutable/chunks/stores-53318450.js">
 	<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-95c6dc0c.js">
 	<link rel="modulepreload" href="./_app/immutable/modules/pages/_page.ts-e9fa0128.js">
 	<link rel="modulepreload" href="./_app/immutable/chunks/_page-802cc2a3.js">
-			<script>
+			
+    <script>
+      window.BASE = (() => {
+        const normalised = (location.pathname.endsWith("/") ? location.pathname.substr(0, location.pathname.length -1) : location.pathname).substr(1);
+        const split = normalised.split('/');
+        const sliced = 0 ? split.slice(0, 0) : split;
+        const str = (sliced.length > 0 && sliced[0] !== "") ? "/" + sliced.join('/') : "";
+        return str;
+      })();
+    </script>
+
+    <script>
+      // ensure we save href as they are loaded, so they do not change on page navigation
+      document.querySelectorAll("link[href]").forEach((v) => v.href = v.href);
+    </script>
+<script>
 		if ('serviceWorker' in navigator) {
 			addEventListener('load', function () {
 				navigator.serviceWorker.register('/service-worker.js');
@@ -37,12 +52,12 @@
 		<div>
 
 
-<header class="svelte-t2wq17"><div class="corner svelte-t2wq17"><a href="https://kit.svelte.dev" class="svelte-t2wq17"><img src="/_app/immutable/assets/svelte-logo-87df40b8.svg" alt="SvelteKit" class="svelte-t2wq17"></a></div>
+<header class="svelte-t2wq17"><div class="corner svelte-t2wq17"><a href="https://kit.svelte.dev" class="svelte-t2wq17"><img src="./_app/immutable/assets/svelte-logo-87df40b8.svg" alt="SvelteKit" class="svelte-t2wq17"></a></div>
 
 	<nav class="svelte-t2wq17"><svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-t2wq17"><path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" class="svelte-t2wq17"></path></svg>
-		<ul class="svelte-t2wq17"><li class="svelte-t2wq17 active"><a sveltekit:prefetch href="/" class="svelte-t2wq17">Home</a></li>
-			<li class="svelte-t2wq17"><a sveltekit:prefetch href="/about" class="svelte-t2wq17">About</a></li>
-			<li class="svelte-t2wq17"><a sveltekit:prefetch href="/todos" class="svelte-t2wq17">Todos</a></li></ul>
+		<ul class="svelte-t2wq17"><li class="svelte-t2wq17 active"><a sveltekit:prefetch href="./" class="svelte-t2wq17">Home</a></li>
+			<li class="svelte-t2wq17"><a sveltekit:prefetch href="./about" class="svelte-t2wq17">About</a></li>
+			<li class="svelte-t2wq17"><a sveltekit:prefetch href="./todos" class="svelte-t2wq17">Todos</a></li></ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-t2wq17"><path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" class="svelte-t2wq17"></path></svg></nav>
 
 	<div class="corner svelte-t2wq17"></div>
@@ -72,13 +87,13 @@
 
 
 		<script type="module" data-sveltekit-hydrate="13pf6wa">
-		import { set_public_env, start } from "./_app/immutable/start-2cf27035.js";
+		import { set_public_env, start } from "./_app/immutable/start-4f24206f.js";
 
 		set_public_env({});
 
 		start({
 			target: document.querySelector('[data-sveltekit-hydrate="13pf6wa"]').parentNode,
-			paths: {"base":"","assets":""},
+			paths: {"base": window.BASE,"assets":""},
 			route: true,
 			spa: false,
 			trailing_slash: "never",

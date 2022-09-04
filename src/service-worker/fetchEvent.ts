@@ -7,7 +7,6 @@ export default (event: FetchEvent): void => {
 				return cacheResponse;
 			}
 
-			console.info(`trying to fetch from server: ${event.request.url}`);
 			const cache = await caches.open(CACHE_NAME);
 
 			return fetch(event.request)
@@ -20,7 +19,7 @@ export default (event: FetchEvent): void => {
 							console.error(error);
 						}
 					} else {
-						console.log('Not added', event.request.url, event.request.mode);
+						// console.log('Not added', event.request.url, event.request.mode);
 					}
 
 					return fetchResponse;

@@ -2,7 +2,6 @@
 	"short_name": "App",
 	"name": "my awesome App",
 	"start_url": "index.html",
-	"id": "index.html",
 	"display": "fullscreen",
 	"theme_color": "#000",
 	"background_color": "#fff",
