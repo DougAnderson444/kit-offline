@@ -1,6 +1,6 @@
 import { S as SvelteComponent, i as init, s as safe_not_equal, k as element, a as space, B as svg_element, q as text, l as claim_element, m as children, h as detach, c as claim_space, C as claim_svg_element, r as claim_text, D as src_url_equal, n as attr, E as toggle_class, b as insert_hydration, F as append_hydration, A as noop, G as component_subscribe, H as create_slot, v as create_component, w as claim_component, x as mount_component, I as update_slot_base, J as get_all_dirty_from_scope, K as get_slot_changes, f as transition_in, t as transition_out, y as destroy_component } from "../../chunks/index-5b0149c9.js";
-import { p as page } from "../../chunks/stores-53318450.js";
-import "../../chunks/singletons-03b9dd82.js";
+import { p as page } from "../../chunks/stores-d5459a1e.js";
+import "../../chunks/singletons-3bb2d03b.js";
 import "../../chunks/index-b73ee6b7.js";
 const logo = "" + new URL("../../assets/svelte-logo-87df40b8.svg", import.meta.url).href;
 const Header_svelte_svelte_type_style_lang = "";
@@ -373,4 +373,4 @@ class Layout extends SvelteComponent {
 export {
   Layout as default
 };
-//# sourceMappingURL=_layout.svelte-3b251c56.js.map
+//# sourceMappingURL=_layout.svelte-d902a4e9.js.map
