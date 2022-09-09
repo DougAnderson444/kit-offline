@@ -1,7 +1,6 @@
-import { S as SvelteComponent, i as init, s as safe_not_equal, k as element, a as space, B as svg_element, q as text, l as claim_element, m as children, h as detach, c as claim_space, C as claim_svg_element, r as claim_text, D as src_url_equal, n as attr, E as toggle_class, b as insert_hydration, F as append_hydration, A as noop, G as component_subscribe, H as create_slot, v as create_component, w as claim_component, x as mount_component, I as update_slot_base, J as get_all_dirty_from_scope, K as get_slot_changes, f as transition_in, t as transition_out, y as destroy_component } from "../../chunks/index-5b0149c9.js";
-import { p as page } from "../../chunks/stores-d5459a1e.js";
-import "../../chunks/singletons-3bb2d03b.js";
-import "../../chunks/index-b73ee6b7.js";
+import { S as SvelteComponent, i as init, s as safe_not_equal, k as element, a as space, D as svg_element, q as text, l as claim_element, m as children, h as detach, c as claim_space, E as claim_svg_element, r as claim_text, F as src_url_equal, n as attr, G as base, H as toggle_class, b as insert_hydration, I as append_hydration, J as noop, K as component_subscribe, L as create_slot, v as create_component, w as claim_component, x as mount_component, M as update_slot_base, N as get_all_dirty_from_scope, O as get_slot_changes, f as transition_in, t as transition_out, y as destroy_component } from "../../chunks/paths-03251350.js";
+import { p as page } from "../../chunks/stores-682d6f0f.js";
+import "../../chunks/singletons-1148c08f.js";
 const logo = "" + new URL("../../assets/svelte-logo-87df40b8.svg", import.meta.url).href;
 const Header_svelte_svelte_type_style_lang = "";
 function create_fragment$1(ctx) {
@@ -16,21 +15,13 @@ function create_fragment$1(ctx) {
   let path0;
   let t1;
   let ul;
-  let li0;
+  let li;
   let a1;
   let t2;
   let t3;
-  let li1;
-  let a2;
-  let t4;
-  let t5;
-  let li2;
-  let a3;
-  let t6;
-  let t7;
   let svg1;
   let path1;
-  let t8;
+  let t4;
   let div1;
   return {
     c() {
@@ -44,21 +35,13 @@ function create_fragment$1(ctx) {
       path0 = svg_element("path");
       t1 = space();
       ul = element("ul");
-      li0 = element("li");
+      li = element("li");
       a1 = element("a");
       t2 = text("Home");
       t3 = space();
-      li1 = element("li");
-      a2 = element("a");
-      t4 = text("About");
-      t5 = space();
-      li2 = element("li");
-      a3 = element("a");
-      t6 = text("Todos");
-      t7 = space();
       svg1 = svg_element("svg");
       path1 = svg_element("path");
-      t8 = space();
+      t4 = space();
       div1 = element("div");
       this.h();
     },
@@ -87,9 +70,9 @@ function create_fragment$1(ctx) {
       t1 = claim_space(nav_nodes);
       ul = claim_element(nav_nodes, "UL", { class: true });
       var ul_nodes = children(ul);
-      li0 = claim_element(ul_nodes, "LI", { class: true });
-      var li0_nodes = children(li0);
-      a1 = claim_element(li0_nodes, "A", {
+      li = claim_element(ul_nodes, "LI", { class: true });
+      var li_nodes = children(li);
+      a1 = claim_element(li_nodes, "A", {
         "sveltekit:prefetch": true,
         href: true,
         class: true
@@ -97,33 +80,9 @@ function create_fragment$1(ctx) {
       var a1_nodes = children(a1);
       t2 = claim_text(a1_nodes, "Home");
       a1_nodes.forEach(detach);
-      li0_nodes.forEach(detach);
-      t3 = claim_space(ul_nodes);
-      li1 = claim_element(ul_nodes, "LI", { class: true });
-      var li1_nodes = children(li1);
-      a2 = claim_element(li1_nodes, "A", {
-        "sveltekit:prefetch": true,
-        href: true,
-        class: true
-      });
-      var a2_nodes = children(a2);
-      t4 = claim_text(a2_nodes, "About");
-      a2_nodes.forEach(detach);
-      li1_nodes.forEach(detach);
-      t5 = claim_space(ul_nodes);
-      li2 = claim_element(ul_nodes, "LI", { class: true });
-      var li2_nodes = children(li2);
-      a3 = claim_element(li2_nodes, "A", {
-        "sveltekit:prefetch": true,
-        href: true,
-        class: true
-      });
-      var a3_nodes = children(a3);
-      t6 = claim_text(a3_nodes, "Todos");
-      a3_nodes.forEach(detach);
-      li2_nodes.forEach(detach);
+      li_nodes.forEach(detach);
       ul_nodes.forEach(detach);
-      t7 = claim_space(nav_nodes);
+      t3 = claim_space(nav_nodes);
       svg1 = claim_svg_element(nav_nodes, "svg", {
         viewBox: true,
         "aria-hidden": true,
@@ -134,7 +93,7 @@ function create_fragment$1(ctx) {
       children(path1).forEach(detach);
       svg1_nodes.forEach(detach);
       nav_nodes.forEach(detach);
-      t8 = claim_space(header_nodes);
+      t4 = claim_space(header_nodes);
       div1 = claim_element(header_nodes, "DIV", { class: true });
       var div1_nodes = children(div1);
       div1_nodes.forEach(detach);
@@ -155,20 +114,10 @@ function create_fragment$1(ctx) {
       attr(svg0, "aria-hidden", "true");
       attr(svg0, "class", "svelte-t2wq17");
       attr(a1, "sveltekit:prefetch", "");
-      attr(a1, "href", "/");
+      attr(a1, "href", base + "/");
       attr(a1, "class", "svelte-t2wq17");
-      attr(li0, "class", "svelte-t2wq17");
-      toggle_class(li0, "active", ctx[0].url.pathname === "/");
-      attr(a2, "sveltekit:prefetch", "");
-      attr(a2, "href", "/about");
-      attr(a2, "class", "svelte-t2wq17");
-      attr(li1, "class", "svelte-t2wq17");
-      toggle_class(li1, "active", ctx[0].url.pathname === "/about");
-      attr(a3, "sveltekit:prefetch", "");
-      attr(a3, "href", "/todos");
-      attr(a3, "class", "svelte-t2wq17");
-      attr(li2, "class", "svelte-t2wq17");
-      toggle_class(li2, "active", ctx[0].url.pathname === "/todos");
+      attr(li, "class", "svelte-t2wq17");
+      toggle_class(li, "active", ctx[0].url.pathname === "/");
       attr(ul, "class", "svelte-t2wq17");
       attr(path1, "d", "M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z");
       attr(path1, "class", "svelte-t2wq17");
@@ -190,32 +139,18 @@ function create_fragment$1(ctx) {
       append_hydration(svg0, path0);
       append_hydration(nav, t1);
       append_hydration(nav, ul);
-      append_hydration(ul, li0);
-      append_hydration(li0, a1);
+      append_hydration(ul, li);
+      append_hydration(li, a1);
       append_hydration(a1, t2);
-      append_hydration(ul, t3);
-      append_hydration(ul, li1);
-      append_hydration(li1, a2);
-      append_hydration(a2, t4);
-      append_hydration(ul, t5);
-      append_hydration(ul, li2);
-      append_hydration(li2, a3);
-      append_hydration(a3, t6);
-      append_hydration(nav, t7);
+      append_hydration(nav, t3);
       append_hydration(nav, svg1);
       append_hydration(svg1, path1);
-      append_hydration(header, t8);
+      append_hydration(header, t4);
       append_hydration(header, div1);
     },
     p(ctx2, [dirty]) {
       if (dirty & 1) {
-        toggle_class(li0, "active", ctx2[0].url.pathname === "/");
-      }
-      if (dirty & 1) {
-        toggle_class(li1, "active", ctx2[0].url.pathname === "/about");
-      }
-      if (dirty & 1) {
-        toggle_class(li2, "active", ctx2[0].url.pathname === "/todos");
+        toggle_class(li, "active", ctx2[0].url.pathname === "/");
       }
     },
     i: noop,
@@ -252,8 +187,8 @@ function create_fragment(ctx) {
   let t4;
   let current;
   header = new Header({});
-  const default_slot_template = ctx[1].default;
-  const default_slot = create_slot(default_slot_template, ctx, ctx[0], null);
+  const default_slot_template = ctx[2].default;
+  const default_slot = create_slot(default_slot_template, ctx, ctx[1], null);
   return {
     c() {
       create_component(header.$$.fragment);
@@ -317,13 +252,13 @@ function create_fragment(ctx) {
     },
     p(ctx2, [dirty]) {
       if (default_slot) {
-        if (default_slot.p && (!current || dirty & 1)) {
+        if (default_slot.p && (!current || dirty & 2)) {
           update_slot_base(
             default_slot,
             default_slot_template,
             ctx2,
-            ctx2[0],
-            !current ? get_all_dirty_from_scope(ctx2[0]) : get_slot_changes(default_slot_template, ctx2[0], dirty, null),
+            ctx2[1],
+            !current ? get_all_dirty_from_scope(ctx2[1]) : get_slot_changes(default_slot_template, ctx2[1], dirty, null),
             null
           );
         }
@@ -358,19 +293,23 @@ function create_fragment(ctx) {
 }
 function instance($$self, $$props, $$invalidate) {
   let { $$slots: slots = {}, $$scope } = $$props;
+  const prerender = true;
   $$self.$$set = ($$props2) => {
     if ("$$scope" in $$props2)
-      $$invalidate(0, $$scope = $$props2.$$scope);
+      $$invalidate(1, $$scope = $$props2.$$scope);
   };
-  return [$$scope, slots];
+  return [prerender, $$scope, slots];
 }
 class Layout extends SvelteComponent {
   constructor(options) {
     super();
-    init(this, options, instance, create_fragment, safe_not_equal, {});
+    init(this, options, instance, create_fragment, safe_not_equal, { prerender: 0 });
+  }
+  get prerender() {
+    return this.$$.ctx[0];
   }
 }
 export {
   Layout as default
 };
-//# sourceMappingURL=_layout.svelte-d902a4e9.js.map
+//# sourceMappingURL=_layout.svelte-4937fc84.js.map

@@ -4,9 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { S as SvelteComponent, i as init, s as safe_not_equal, a as space, e as empty, c as claim_space, b as insert_hydration, g as group_outros, t as transition_out, d as check_outros, f as transition_in, h as detach, j as afterUpdate, o as onMount, k as element, l as claim_element, m as children, n as attr, p as set_style, q as text, r as claim_text, u as set_data, v as create_component, w as claim_component, x as mount_component, y as destroy_component, z as tick } from "./chunks/index-5b0149c9.js";
-import { g as get_base_uri, f as find_anchor, a as get_href, s as stores, b as scroll_state, i as init$1, c as set_paths } from "./chunks/singletons-3bb2d03b.js";
-import "./chunks/index-b73ee6b7.js";
+import { S as SvelteComponent, i as init, s as safe_not_equal, a as space, e as empty, c as claim_space, b as insert_hydration, g as group_outros, t as transition_out, d as check_outros, f as transition_in, h as detach, j as afterUpdate, o as onMount, k as element, l as claim_element, m as children, n as attr, p as set_style, q as text, r as claim_text, u as set_data, v as create_component, w as claim_component, x as mount_component, y as destroy_component, z as tick, A as set_paths } from "./chunks/paths-03251350.js";
+import { g as get_base_uri, f as find_anchor, a as get_href, s as stores, b as scroll_state, i as init$1 } from "./chunks/singletons-1148c08f.js";
 class HttpError {
   constructor(status, message) {
     __publicField(this, "name", "HttpError");
@@ -913,16 +912,12 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
 };
 const matchers = {};
 const nodes = [
-  () => __vitePreload(() => import("./chunks/0-e21cdecc.js"), true ? ["chunks\\0-e21cdecc.js","components\\pages\\_layout.svelte-d902a4e9.js","assets\\+layout-f00d6398.css","chunks\\index-5b0149c9.js","chunks\\stores-d5459a1e.js","chunks\\singletons-3bb2d03b.js","chunks\\index-b73ee6b7.js"] : void 0, import.meta.url),
-  () => __vitePreload(() => import("./chunks/1-e82ed13f.js"), true ? ["chunks\\1-e82ed13f.js","components\\error.svelte-f11dcb5d.js","chunks\\index-5b0149c9.js","chunks\\stores-d5459a1e.js","chunks\\singletons-3bb2d03b.js","chunks\\index-b73ee6b7.js"] : void 0, import.meta.url),
-  () => __vitePreload(() => import("./chunks/2-9da09714.js"), true ? ["chunks\\2-9da09714.js","chunks\\_page-802cc2a3.js","components\\pages\\_page.svelte-c3938bfb.js","assets\\+page-ab7a0104.css","chunks\\index-5b0149c9.js","chunks\\index-b73ee6b7.js"] : void 0, import.meta.url),
-  () => __vitePreload(() => import("./chunks/3-91f18ffc.js"), true ? ["chunks\\3-91f18ffc.js","chunks\\_page-efb9c460.js","components\\pages\\about\\_page.svelte-63812afa.js","assets\\+page-5770d689.css","chunks\\index-5b0149c9.js"] : void 0, import.meta.url),
-  () => __vitePreload(() => import("./chunks/4-16c447bb.js"), true ? ["chunks\\4-16c447bb.js","components\\pages\\todos\\_page.svelte-1f226268.js","assets\\+page-5519d4df.css","chunks\\index-5b0149c9.js","chunks\\singletons-3bb2d03b.js","chunks\\index-b73ee6b7.js"] : void 0, import.meta.url)
+  () => __vitePreload(() => import("./chunks/0-e3ae6ac2.js"), true ? ["chunks\\0-e3ae6ac2.js","components\\pages\\_layout.svelte-4937fc84.js","assets\\+layout-f00d6398.css","chunks\\paths-03251350.js","chunks\\stores-682d6f0f.js","chunks\\singletons-1148c08f.js"] : void 0, import.meta.url),
+  () => __vitePreload(() => import("./chunks/1-044af7fe.js"), true ? ["chunks\\1-044af7fe.js","components\\error.svelte-7d27ffec.js","chunks\\paths-03251350.js","chunks\\stores-682d6f0f.js","chunks\\singletons-1148c08f.js"] : void 0, import.meta.url),
+  () => __vitePreload(() => import("./chunks/2-86f2d5f7.js"), true ? ["chunks\\2-86f2d5f7.js","chunks\\_page-802cc2a3.js","components\\pages\\_page.svelte-fae7dd47.js","assets\\+page-ab7a0104.css","chunks\\paths-03251350.js"] : void 0, import.meta.url)
 ];
 const dictionary = {
-  "": [[1], [0], 2],
-  "about": [[1], [0], 3],
-  "todos": [[1], [0], 4, 1]
+  "": [[1], [0], 2]
 };
 const SCROLL_KEY = "sveltekit:scroll";
 const INDEX_KEY = "sveltekit:index";
@@ -1788,4 +1783,4 @@ export {
   set_public_env,
   start
 };
-//# sourceMappingURL=start-3945584a.js.map
+//# sourceMappingURL=start-7d0ac574.js.map

@@ -1,5 +1,4 @@
-import { L as now, M as loop, S as SvelteComponent, i as init, s as safe_not_equal, k as element, B as svg_element, a as space, q as text, l as claim_element, m as children, C as claim_svg_element, h as detach, c as claim_space, r as claim_text, n as attr, p as set_style, b as insert_hydration, F as append_hydration, N as listen, u as set_data, A as noop, O as run_all, G as component_subscribe, v as create_component, P as query_selector_all, w as claim_component, D as src_url_equal, x as mount_component, f as transition_in, t as transition_out, y as destroy_component } from "../../chunks/index-5b0149c9.js";
-import { w as writable } from "../../chunks/index-b73ee6b7.js";
+import { B as writable, P as now, Q as loop, S as SvelteComponent, i as init, s as safe_not_equal, k as element, D as svg_element, a as space, q as text, l as claim_element, m as children, E as claim_svg_element, h as detach, c as claim_space, r as claim_text, n as attr, p as set_style, b as insert_hydration, I as append_hydration, R as listen, u as set_data, J as noop, T as run_all, K as component_subscribe, v as create_component, U as query_selector_all, w as claim_component, F as src_url_equal, x as mount_component, f as transition_in, t as transition_out, y as destroy_component, G as base } from "../../chunks/paths-03251350.js";
 function is_date(obj) {
   return Object.prototype.toString.call(obj) === "[object Date]";
 }
@@ -374,9 +373,9 @@ function create_fragment(ctx) {
       document.title = "Home";
       attr(meta, "name", "description");
       attr(meta, "content", "Svelte demo app");
-      attr(source, "srcset", "svelte-welcome.webp");
+      attr(source, "srcset", base + "/svelte-welcome.webp");
       attr(source, "type", "image/webp");
-      if (!src_url_equal(img.src, img_src_value = "svelte-welcome.png"))
+      if (!src_url_equal(img.src, img_src_value = base + "/svelte-welcome.png"))
         attr(img, "src", img_src_value);
       attr(img, "alt", "Welcome");
       attr(img, "class", "svelte-1egtvge");
@@ -436,4 +435,4 @@ class Page extends SvelteComponent {
 export {
   Page as default
 };
-//# sourceMappingURL=_page.svelte-c3938bfb.js.map
+//# sourceMappingURL=_page.svelte-fae7dd47.js.map

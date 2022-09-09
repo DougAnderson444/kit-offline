@@ -1,10 +1,4 @@
-import { w as writable } from "./index-b73ee6b7.js";
-let base = "";
-let assets = "";
-function set_paths(paths) {
-  base = paths.base;
-  assets = paths.assets || base;
-}
+import { B as writable, C as assets } from "./paths-03251350.js";
 function get_base_uri(doc) {
   let baseURI = doc.baseURI;
   if (!baseURI) {
@@ -60,7 +54,7 @@ function create_updated_store() {
     });
     if (res.ok) {
       const { version } = await res.json();
-      const updated = version !== "1662321376953";
+      const updated = version !== "1662725987480";
       if (updated) {
         set(true);
         clearTimeout(timeout);
@@ -75,9 +69,8 @@ function create_updated_store() {
     check
   };
 }
-let client;
 function init(opts) {
-  client = opts.client;
+  opts.client;
 }
 const stores = {
   url: notifiable_store({}),
@@ -88,11 +81,9 @@ const stores = {
 export {
   get_href as a,
   scroll_state as b,
-  set_paths as c,
-  client as d,
   find_anchor as f,
   get_base_uri as g,
   init as i,
   stores as s
 };
-//# sourceMappingURL=singletons-3bb2d03b.js.map
+//# sourceMappingURL=singletons-1148c08f.js.map

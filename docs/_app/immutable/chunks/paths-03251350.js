@@ -1,6 +1,5 @@
 function noop() {
 }
-const identity = (x) => x;
 function assign(tar, src) {
   for (const k in src)
     tar[k] = src[k];
@@ -85,9 +84,6 @@ function get_all_dirty_from_scope($$scope) {
     return dirty;
   }
   return -1;
-}
-function action_destroyer(action_result) {
-  return action_result && is_function(action_result.destroy) ? action_result.destroy : noop;
 }
 const is_client = typeof window !== "undefined";
 let now = is_client ? () => window.performance.now() : () => Date.now();
@@ -183,26 +179,6 @@ function init_hydrate(target) {
     const anchor = j < lis.length ? lis[j] : null;
     target.insertBefore(toMove[i], anchor);
   }
-}
-function append(target, node) {
-  target.appendChild(node);
-}
-function get_root_for_style(node) {
-  if (!node)
-    return document;
-  const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
-  if (root && root.host) {
-    return root;
-  }
-  return node.ownerDocument;
-}
-function append_empty_stylesheet(node) {
-  const style_element = element("style");
-  append_stylesheet(get_root_for_style(node), style_element);
-  return style_element.sheet;
-}
-function append_stylesheet(node, style) {
-  append(node.head || node, style);
 }
 function append_hydration(target, node) {
   if (is_hydrating) {
@@ -363,148 +339,8 @@ function set_style(node, key, value, important) {
 function toggle_class(element2, name, toggle) {
   element2.classList[toggle ? "add" : "remove"](name);
 }
-function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
-  const e = document.createEvent("CustomEvent");
-  e.initCustomEvent(type, bubbles, cancelable, detail);
-  return e;
-}
 function query_selector_all(selector, parent = document.body) {
   return Array.from(parent.querySelectorAll(selector));
-}
-const managed_styles = /* @__PURE__ */ new Map();
-let active = 0;
-function hash(str) {
-  let hash2 = 5381;
-  let i = str.length;
-  while (i--)
-    hash2 = (hash2 << 5) - hash2 ^ str.charCodeAt(i);
-  return hash2 >>> 0;
-}
-function create_style_information(doc, node) {
-  const info = { stylesheet: append_empty_stylesheet(node), rules: {} };
-  managed_styles.set(doc, info);
-  return info;
-}
-function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
-  const step = 16.666 / duration;
-  let keyframes = "{\n";
-  for (let p = 0; p <= 1; p += step) {
-    const t = a + (b - a) * ease(p);
-    keyframes += p * 100 + `%{${fn(t, 1 - t)}}
-`;
-  }
-  const rule = keyframes + `100% {${fn(b, 1 - b)}}
-}`;
-  const name = `__svelte_${hash(rule)}_${uid}`;
-  const doc = get_root_for_style(node);
-  const { stylesheet, rules } = managed_styles.get(doc) || create_style_information(doc, node);
-  if (!rules[name]) {
-    rules[name] = true;
-    stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
-  }
-  const animation = node.style.animation || "";
-  node.style.animation = `${animation ? `${animation}, ` : ""}${name} ${duration}ms linear ${delay}ms 1 both`;
-  active += 1;
-  return name;
-}
-function delete_rule(node, name) {
-  const previous = (node.style.animation || "").split(", ");
-  const next = previous.filter(
-    name ? (anim) => anim.indexOf(name) < 0 : (anim) => anim.indexOf("__svelte") === -1
-  );
-  const deleted = previous.length - next.length;
-  if (deleted) {
-    node.style.animation = next.join(", ");
-    active -= deleted;
-    if (!active)
-      clear_rules();
-  }
-}
-function clear_rules() {
-  raf(() => {
-    if (active)
-      return;
-    managed_styles.forEach((info) => {
-      const { stylesheet } = info;
-      let i = stylesheet.cssRules.length;
-      while (i--)
-        stylesheet.deleteRule(i);
-      info.rules = {};
-    });
-    managed_styles.clear();
-  });
-}
-function create_animation(node, from, fn, params) {
-  if (!from)
-    return noop;
-  const to = node.getBoundingClientRect();
-  if (from.left === to.left && from.right === to.right && from.top === to.top && from.bottom === to.bottom)
-    return noop;
-  const {
-    delay = 0,
-    duration = 300,
-    easing = identity,
-    start: start_time = now() + delay,
-    end = start_time + duration,
-    tick: tick2 = noop,
-    css
-  } = fn(node, { from, to }, params);
-  let running = true;
-  let started = false;
-  let name;
-  function start() {
-    if (css) {
-      name = create_rule(node, 0, 1, duration, delay, easing, css);
-    }
-    if (!delay) {
-      started = true;
-    }
-  }
-  function stop() {
-    if (css)
-      delete_rule(node, name);
-    running = false;
-  }
-  loop((now2) => {
-    if (!started && now2 >= start_time) {
-      started = true;
-    }
-    if (started && now2 >= end) {
-      tick2(1, 0);
-      stop();
-    }
-    if (!running) {
-      return false;
-    }
-    if (started) {
-      const p = now2 - start_time;
-      const t = 0 + 1 * easing(p / duration);
-      tick2(t, 1 - t);
-    }
-    return true;
-  });
-  start();
-  tick2(0, 1);
-  return stop;
-}
-function fix_position(node) {
-  const style = getComputedStyle(node);
-  if (style.position !== "absolute" && style.position !== "fixed") {
-    const { width, height } = style;
-    const a = node.getBoundingClientRect();
-    node.style.position = "absolute";
-    node.style.width = width;
-    node.style.height = height;
-    add_transform(node, a);
-  }
-}
-function add_transform(node, a) {
-  const b = node.getBoundingClientRect();
-  if (a.left !== b.left || a.top !== b.top) {
-    const style = getComputedStyle(node);
-    const transform = style.transform === "none" ? "" : style.transform;
-    node.style.transform = `${transform} translate(${a.left - b.left}px, ${a.top - b.top}px)`;
-  }
 }
 let current_component;
 function set_current_component(component) {
@@ -582,19 +418,6 @@ function update($$) {
     $$.after_update.forEach(add_render_callback);
   }
 }
-let promise;
-function wait() {
-  if (!promise) {
-    promise = Promise.resolve();
-    promise.then(() => {
-      promise = null;
-    });
-  }
-  return promise;
-}
-function dispatch(node, direction, kind) {
-  node.dispatchEvent(custom_event(`${direction ? "intro" : "outro"}${kind}`));
-}
 const outroing = /* @__PURE__ */ new Set();
 let outros;
 function group_outros() {
@@ -633,177 +456,6 @@ function transition_out(block, local, detach2, callback) {
   } else if (callback) {
     callback();
   }
-}
-const null_transition = { duration: 0 };
-function create_bidirectional_transition(node, fn, params, intro) {
-  let config = fn(node, params);
-  let t = intro ? 0 : 1;
-  let running_program = null;
-  let pending_program = null;
-  let animation_name = null;
-  function clear_animation() {
-    if (animation_name)
-      delete_rule(node, animation_name);
-  }
-  function init2(program, duration) {
-    const d = program.b - t;
-    duration *= Math.abs(d);
-    return {
-      a: t,
-      b: program.b,
-      d,
-      duration,
-      start: program.start,
-      end: program.start + duration,
-      group: program.group
-    };
-  }
-  function go(b) {
-    const { delay = 0, duration = 300, easing = identity, tick: tick2 = noop, css } = config || null_transition;
-    const program = {
-      start: now() + delay,
-      b
-    };
-    if (!b) {
-      program.group = outros;
-      outros.r += 1;
-    }
-    if (running_program || pending_program) {
-      pending_program = program;
-    } else {
-      if (css) {
-        clear_animation();
-        animation_name = create_rule(node, t, b, duration, delay, easing, css);
-      }
-      if (b)
-        tick2(0, 1);
-      running_program = init2(program, duration);
-      add_render_callback(() => dispatch(node, b, "start"));
-      loop((now2) => {
-        if (pending_program && now2 > pending_program.start) {
-          running_program = init2(pending_program, duration);
-          pending_program = null;
-          dispatch(node, running_program.b, "start");
-          if (css) {
-            clear_animation();
-            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
-          }
-        }
-        if (running_program) {
-          if (now2 >= running_program.end) {
-            tick2(t = running_program.b, 1 - t);
-            dispatch(node, running_program.b, "end");
-            if (!pending_program) {
-              if (running_program.b) {
-                clear_animation();
-              } else {
-                if (!--running_program.group.r)
-                  run_all(running_program.group.c);
-              }
-            }
-            running_program = null;
-          } else if (now2 >= running_program.start) {
-            const p = now2 - running_program.start;
-            t = running_program.a + running_program.d * easing(p / running_program.duration);
-            tick2(t, 1 - t);
-          }
-        }
-        return !!(running_program || pending_program);
-      });
-    }
-  }
-  return {
-    run(b) {
-      if (is_function(config)) {
-        wait().then(() => {
-          config = config();
-          go(b);
-        });
-      } else {
-        go(b);
-      }
-    },
-    end() {
-      clear_animation();
-      running_program = pending_program = null;
-    }
-  };
-}
-function outro_and_destroy_block(block, lookup) {
-  transition_out(block, 1, 1, () => {
-    lookup.delete(block.key);
-  });
-}
-function fix_and_outro_and_destroy_block(block, lookup) {
-  block.f();
-  outro_and_destroy_block(block, lookup);
-}
-function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block, next, get_context) {
-  let o = old_blocks.length;
-  let n = list.length;
-  let i = o;
-  const old_indexes = {};
-  while (i--)
-    old_indexes[old_blocks[i].key] = i;
-  const new_blocks = [];
-  const new_lookup = /* @__PURE__ */ new Map();
-  const deltas = /* @__PURE__ */ new Map();
-  i = n;
-  while (i--) {
-    const child_ctx = get_context(ctx, list, i);
-    const key = get_key(child_ctx);
-    let block = lookup.get(key);
-    if (!block) {
-      block = create_each_block(key, child_ctx);
-      block.c();
-    } else if (dynamic) {
-      block.p(child_ctx, dirty);
-    }
-    new_lookup.set(key, new_blocks[i] = block);
-    if (key in old_indexes)
-      deltas.set(key, Math.abs(i - old_indexes[key]));
-  }
-  const will_move = /* @__PURE__ */ new Set();
-  const did_move = /* @__PURE__ */ new Set();
-  function insert(block) {
-    transition_in(block, 1);
-    block.m(node, next);
-    lookup.set(block.key, block);
-    next = block.first;
-    n--;
-  }
-  while (o && n) {
-    const new_block = new_blocks[n - 1];
-    const old_block = old_blocks[o - 1];
-    const new_key = new_block.key;
-    const old_key = old_block.key;
-    if (new_block === old_block) {
-      next = new_block.first;
-      o--;
-      n--;
-    } else if (!new_lookup.has(old_key)) {
-      destroy(old_block, lookup);
-      o--;
-    } else if (!lookup.has(new_key) || will_move.has(new_key)) {
-      insert(new_block);
-    } else if (did_move.has(old_key)) {
-      o--;
-    } else if (deltas.get(new_key) > deltas.get(old_key)) {
-      did_move.add(new_key);
-      insert(new_block);
-    } else {
-      will_move.add(old_key);
-      o--;
-    }
-  }
-  while (o--) {
-    const old_block = old_blocks[o];
-    if (!new_lookup.has(old_block.key))
-      destroy(old_block, lookup);
-  }
-  while (n)
-    insert(new_blocks[n - 1]);
-  return new_blocks;
 }
 function create_component(block) {
   block && block.c();
@@ -920,33 +572,76 @@ class SvelteComponent {
     }
   }
 }
+const subscriber_queue = [];
+function writable(value, start = noop) {
+  let stop;
+  const subscribers = /* @__PURE__ */ new Set();
+  function set(new_value) {
+    if (safe_not_equal(value, new_value)) {
+      value = new_value;
+      if (stop) {
+        const run_queue = !subscriber_queue.length;
+        for (const subscriber of subscribers) {
+          subscriber[1]();
+          subscriber_queue.push(subscriber, value);
+        }
+        if (run_queue) {
+          for (let i = 0; i < subscriber_queue.length; i += 2) {
+            subscriber_queue[i][0](subscriber_queue[i + 1]);
+          }
+          subscriber_queue.length = 0;
+        }
+      }
+    }
+  }
+  function update2(fn) {
+    set(fn(value));
+  }
+  function subscribe2(run2, invalidate = noop) {
+    const subscriber = [run2, invalidate];
+    subscribers.add(subscriber);
+    if (subscribers.size === 1) {
+      stop = start(set) || noop;
+    }
+    run2(value);
+    return () => {
+      subscribers.delete(subscriber);
+      if (subscribers.size === 0) {
+        stop();
+        stop = null;
+      }
+    };
+  }
+  return { set, update: update2, subscribe: subscribe2 };
+}
+let base = "";
+let assets = "";
+function set_paths(paths) {
+  base = paths.base;
+  assets = paths.assets || base;
+}
 export {
-  noop as A,
-  svg_element as B,
-  claim_svg_element as C,
-  src_url_equal as D,
-  toggle_class as E,
-  append_hydration as F,
-  component_subscribe as G,
-  create_slot as H,
-  update_slot_base as I,
-  get_all_dirty_from_scope as J,
-  get_slot_changes as K,
-  now as L,
-  loop as M,
-  listen as N,
-  run_all as O,
-  query_selector_all as P,
-  is_function as Q,
-  action_destroyer as R,
+  set_paths as A,
+  writable as B,
+  assets as C,
+  svg_element as D,
+  claim_svg_element as E,
+  src_url_equal as F,
+  base as G,
+  toggle_class as H,
+  append_hydration as I,
+  noop as J,
+  component_subscribe as K,
+  create_slot as L,
+  update_slot_base as M,
+  get_all_dirty_from_scope as N,
+  get_slot_changes as O,
+  now as P,
+  loop as Q,
+  listen as R,
   SvelteComponent as S,
-  update_keyed_each as T,
-  fix_position as U,
-  add_transform as V,
-  create_animation as W,
-  add_render_callback as X,
-  create_bidirectional_transition as Y,
-  fix_and_outro_and_destroy_block as Z,
+  run_all as T,
+  query_selector_all as U,
   space as a,
   insert_hydration as b,
   claim_space as c,
@@ -974,4 +669,4 @@ export {
   destroy_component as y,
   tick as z
 };
-//# sourceMappingURL=index-5b0149c9.js.map
+//# sourceMappingURL=paths-03251350.js.map

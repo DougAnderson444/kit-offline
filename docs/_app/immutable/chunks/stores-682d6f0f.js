@@ -1,5 +1,5 @@
-import "./index-5b0149c9.js";
-import { s as stores } from "./singletons-3bb2d03b.js";
+import "./paths-03251350.js";
+import { s as stores } from "./singletons-1148c08f.js";
 const getStores = () => {
   const stores$1 = stores;
   const readonly_stores = {
@@ -45,4 +45,4 @@ function removed_session() {
 export {
   page as p
 };
-//# sourceMappingURL=stores-d5459a1e.js.map
+//# sourceMappingURL=stores-682d6f0f.js.map
